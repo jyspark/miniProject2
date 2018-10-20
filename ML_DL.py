@@ -15,17 +15,20 @@ from keras.layers import *
 from keras.optimizers import *
 
 
-train_dir = '/media/sf_Assginment1/EC601/miniProject2/data/train/'
-test_dir = '/media/sf_Assginment1/EC601/miniProject2/data/test/'
+#Path to data set for training and testing images
+train_dir = '/media/sf_Assginment1/EC601/miniProject2/data/train3/'
+test_dir = '/media/sf_Assginment1/EC601/miniProject2/data/test3/'
 
+#Labels the first set as 1,0 and the second set as 0,1
 def labeling(img):
-	file_name = img.split('.')[0]
-	if file_name == 'car':
+	file_name = img.split('_')[0]
+	if file_name == 'sunkist':					#car = sunkist
 		label = np.array([1,0])
-	elif file_name == 'truck':
+	elif file_name == 'fruitella':			#fruitella = truck
 		label = np.array([0,1])
 	return label 
 
+#read the images in grayscale & label and train the data set
 def label_and_train():
 	train_set =[]
 	for i in tqdm(os.listdir(train_dir)):
@@ -38,6 +41,7 @@ def label_and_train():
 	shuffle(train_set)
 	return train_set
 
+#read the images in grayscale & label and test the data set
 def label_and_test():
 	test_set =[]
 	for i in tqdm(os.listdir(test_dir)):
@@ -51,11 +55,13 @@ def label_and_test():
 	#print("test images:" ,test_images)
 	return test_set
 
+
 training_data = label_and_train()
 testing_data = label_and_test()
 #print("Testing_img: " , testing_img)
 #print("Testing_img from 10 to 40?: ", testing_img[0:20])
 
+#study the images
 tr_img = np.array([i[0] for i in training_data]).reshape(-1, 128,128,1)
 tr_lbl = np.array([i[1] for i in training_data])
 
@@ -76,36 +82,41 @@ model.add(MaxPool2D(pool_size=5,padding='same'))
 
 model.add(Dropout(0.25))
 model.add(Flatten())
-model.add(Dense(500,activation='relu'))
+model.add(Dense(512,activation='relu'))
 model.add(Dropout(rate=0.5))
 model.add(Dense(2,activation='softmax'))
-#optimizer = Adam(lr=1e-3)
 
 model.compile(optimizer= Adam(lr=1e-3), loss='categorical_crossentropy',metrics=['accuracy'])
-model.fit(x=tr_img,y=tr_lbl,epochs=50,batch_size=100)
+model.fit(x=tr_img,y=tr_lbl,epochs=80,batch_size=100)
 model.summary()
-
 
 fig=plt.figure(figsize=(14,14))
 
+#Display the result
 for c, data in enumerate(testing_data[10:40]):
-	#print(enumerate(testing_img[10:40]))
-	#print("data:", data , '\n')
-	#print("cnt: ", cnt ,'\n')
+	print("cnt: ", cnt ,'\n')
 
 	y = fig.add_subplot(6,5,c+1)
+
+	if c+1 == 1:
+		print("1st Result in Progress \n")
+	elif c+1 == 2:
+		print("2nd Result in Progress \n")
+	elif c+2 == 3:
+		print("3rd Result in Progress \n")
+	else:
+		print((c+1) + "th Result in Progress \n")
 
 	img = data[0]
 	data = img.reshape(1,128,128,1)
 	predict_model = model.predict([data])
 
-	#print("data: ", data)
-	print("model_out: " ,predict_model)
+	#print("model_out: " ,predict_model)
 	
 	if np.argmax(predict_model) == 1:
-		pred_label = 'Truck'
+		pred_label = 'fruitella'			#truck = fruitella
 	else:
-		pred_label='Car'
+		pred_label='sunkist'					# car == sunkist
 
 	y.imshow(img, cmap='gray')
 
@@ -113,5 +124,5 @@ for c, data in enumerate(testing_data[10:40]):
 	y.axes.get_xaxis().set_visible(False)
 	y.axes.get_yaxis().set_visible(False)
 
-	plt.show()
-	plt.savefig('result.png')
+	#plt.show()
+	plt.savefig('result1.png')

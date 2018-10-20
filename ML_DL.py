@@ -16,15 +16,15 @@ from keras.optimizers import *
 
 
 #Path to data set for training and testing images
-train_dir = '/media/sf_Assginment1/EC601/miniProject2/data/train3/'
-test_dir = '/media/sf_Assginment1/EC601/miniProject2/data/test3/'
+train_dir = '/media/sf_Assginment1/EC601/miniProject2/data/train4/'
+test_dir = '/media/sf_Assginment1/EC601/miniProject2/data/test4/'
 
 #Labels the first set as 1,0 and the second set as 0,1
 def labeling(img):
 	file_name = img.split('_')[0]
-	if file_name == 'sunkist':					#car = sunkist
+	if file_name == 'FL':					#car = sunkist
 		label = np.array([1,0])
-	elif file_name == 'fruitella':			#fruitella = truck
+	elif file_name == 'cocoa':				#fruitella = truck
 		label = np.array([0,1])
 	return label 
 
@@ -82,30 +82,30 @@ model.add(MaxPool2D(pool_size=5,padding='same'))
 
 model.add(Dropout(0.25))
 model.add(Flatten())
-model.add(Dense(512,activation='relu'))
+model.add(Dense(500,activation='relu'))				#lower number = ,higher number
 model.add(Dropout(rate=0.5))
-model.add(Dense(2,activation='softmax'))
+model.add(Dense(2,activation='softmax'))			#2 data sets
 
 model.compile(optimizer= Adam(lr=1e-3), loss='categorical_crossentropy',metrics=['accuracy'])
-model.fit(x=tr_img,y=tr_lbl,epochs=80,batch_size=100)
+model.fit(x=tr_img,y=tr_lbl,epochs=80,batch_size=100)		#increasing epochs=     , decreasing epochs= 
 model.summary()
 
 fig=plt.figure(figsize=(14,14))
 
 #Display the result
 for c, data in enumerate(testing_data[10:40]):
-	print("cnt: ", cnt ,'\n')
+	
+	if (c+1) == 1:
+		print("1st Result in Progress ")
+	elif (c+1) == 2:
+		print("2nd Result in Progress ")
+	elif (c+1) == 3:
+		print("3rd Result in Progress ")
+	else:
+		count =str(c+1)
+		print (count+"th Result in Progress") #c+1,"th Result in Progress ")
 
 	y = fig.add_subplot(6,5,c+1)
-
-	if c+1 == 1:
-		print("1st Result in Progress \n")
-	elif c+1 == 2:
-		print("2nd Result in Progress \n")
-	elif c+2 == 3:
-		print("3rd Result in Progress \n")
-	else:
-		print((c+1) + "th Result in Progress \n")
 
 	img = data[0]
 	data = img.reshape(1,128,128,1)
@@ -114,9 +114,9 @@ for c, data in enumerate(testing_data[10:40]):
 	#print("model_out: " ,predict_model)
 	
 	if np.argmax(predict_model) == 1:
-		pred_label = 'fruitella'			#truck = fruitella
+		pred_label = 'cocoa'				#truck = fruitella
 	else:
-		pred_label='sunkist'					# car == sunkist
+		pred_label= 'FL'					# car == sunkist
 
 	y.imshow(img, cmap='gray')
 
@@ -124,5 +124,4 @@ for c, data in enumerate(testing_data[10:40]):
 	y.axes.get_xaxis().set_visible(False)
 	y.axes.get_yaxis().set_visible(False)
 
-	#plt.show()
-	plt.savefig('result1.png')
+	plt.savefig('result3.png')

@@ -6,7 +6,6 @@ from keras.optimizers import *
 import matplotlib.pyplot as plt
 from labeling import labeling
 
-
 def modeling_plotting(tr_img,tr_lbl,testing_data):
 	model = Sequential()
 
@@ -26,9 +25,28 @@ def modeling_plotting(tr_img,tr_lbl,testing_data):
 	model.add(Dropout(rate=0.5))
 	model.add(Dense(2,activation='softmax'))			
 
+
 	model.compile(optimizer= Adam(lr=1e-3), loss='categorical_crossentropy',metrics=['accuracy'])
-	model.fit(x=tr_img,y=tr_lbl,epochs=80,batch_size=100)		 
+	fitting = model.fit(x=tr_img,y=tr_lbl,epochs=80,batch_size=100) #, validation_split=0.2)	 
 	model.summary()
+
+	'''plt.figure()
+	plt.plot(fitting.history['acc'])
+	plt.plot(fitting.history['val_acc'])
+	plt.title('Model Accuracy')
+	plt.ylabel('Acc')
+	plt.xlabel('Epoch')
+	plt.legend(['Train', 'Test'], loc='upper left')
+	plt.savefig('Model Accuracy.png')
+
+	plt.figure()
+	plt.plot(fitting.history['loss'])
+	plt.plot(fitting.history['val_loss'])
+	plt.title('Model Loss')
+	plt.ylabel('Loss')
+	plt.xlabel('Epoch')
+	plt.legend(['Train', 'Test'], loc='upper left')
+	plt.savefig('Model Loss.png')'''
 
 
 	fig=plt.figure(figsize=(14,14))
@@ -64,5 +82,5 @@ def modeling_plotting(tr_img,tr_lbl,testing_data):
 		y.axes.get_yaxis().set_visible(False)
 
 		plt.savefig('result.png')
-		print("The result has been saved in the folder. ")
+	print("The result has been saved in the folder. ")
 

@@ -4,7 +4,6 @@ import os
 import labeling as train_test_Data
 import modeling as modeling
 import numpy as np
-#import Image
 
 def main(user_data):
 	if user_data == '1':
@@ -14,6 +13,7 @@ def main(user_data):
 
 		user_folder = str(input("Is there 'User_Data' Folder? (1 for Yes, 0 for No). "))
 		if user_folder == '0':
+			#If folder does not exist, make folders
 			if os.path.exists(path_Data) == False:
 				os.mkdir(path_Data)
 				os.mkdir(path_Data + '/User_Train')
@@ -24,6 +24,7 @@ def main(user_data):
 				os._exit(0)
 
 			elif os.path.exists(path_Data) == True:
+				#Exit the program if the folder is existed
 				print("Folder already existed. Run with the existed data ")
 				pass
 
@@ -38,6 +39,7 @@ def main(user_data):
 				user_train_dir = path_Data +'/User_Train'
 				user_test_dir = path_Data + '/User_Test'
 
+				#Get label for train and test data
 				training_Data = train_test_Data.label_and_train(user_train_dir)
 				testing_Data = train_test_Data.label_and_test(user_test_dir)
 
@@ -47,10 +49,11 @@ def main(user_data):
 				tt_img = np.array([i[0] for i in testing_Data]).reshape(-1, 128,128,1)
 				tt_lbl = np.array([i[1] for i in testing_Data])
 
+				#modeling and plotting the data
 				data_modeling = modeling.modeling_plotting(tr_img,tr_lbl,testing_Data)
 			
 			elif user_data_name == '0':
-				#change the data names
+				#change the data names manually using the code
 				print("Use 'change_Names.py' to change the names of images and re-run the program")
 				os._exit(0)
 			else: 
@@ -60,7 +63,8 @@ def main(user_data):
 				
 
 	elif user_data == '0':
-		print("\nYou are about to run the program with prepared data.\n")
+		#Run the program with my data
+		print("\nThe program is running with the prepared data.\n")
 
 		train_dir = '/media/sf_Assginment1/EC601/miniProject2/data/train4/'
 		test_dir = '/media/sf_Assginment1/EC601/miniProject2/data/test4/'

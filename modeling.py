@@ -65,5 +65,3 @@ def modeling_plotting(tr_img,tr_lbl,testing_data):
 		plt.savefig('result.png')
 	print("The result has been saved in the folder. ")
 
-
-

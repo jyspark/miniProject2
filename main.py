@@ -34,7 +34,7 @@ def main(user_data):
 			if user_data_name == '1':
 				#run the program with the user data
 				print("You are about to run the program with your own data.\n")
-				print("WARNING: Make sure file_name for labeling.py and pred_label from modeling.py have been changed")
+				print("WARNING: Make sure file_name for labeling.py and pred_label from modeling.py have been changed.")
 
 				user_train_dir = path_Data +'/User_Train'
 				user_test_dir = path_Data + '/User_Test'
@@ -54,7 +54,7 @@ def main(user_data):
 			
 			elif user_data_name == '0':
 				#change the data names manually using the code
-				print("Use 'change_Names.py' to change the names of images and re-run the program")
+				print("Use 'change_Names.py' to change the names of images and re-run the program.")
 				os._exit(0)
 			else: 
 				print("Wrong Input.")
@@ -66,8 +66,8 @@ def main(user_data):
 		#Run the program with my data
 		print("\nThe program is running with the prepared data.\n")
 
-		train_dir = '/media/sf_Assginment1/EC601/miniProject2/data/train4/'
-		test_dir = '/media/sf_Assginment1/EC601/miniProject2/data/test4/'
+		train_dir = '/media/sf_Assginment1/EC601/miniProject2/data/train/'
+		test_dir = '/media/sf_Assginment1/EC601/miniProject2/data/test/'
 		
 		training_Data = train_test_Data.label_and_train(train_dir)
 		testing_Data = train_test_Data.label_and_test(test_dir)
@@ -89,5 +89,4 @@ def main(user_data):
 if __name__ == '__main__':
 	user_data = str(input("Do you want to run with your own data set? (1 for Yes, 0 for No). "))
 	main(user_data)
-
 

@@ -62,6 +62,6 @@ def modeling_plotting(tr_img,tr_lbl,testing_data):
 		y.axes.get_xaxis().set_visible(False)
 		y.axes.get_yaxis().set_visible(False)
 
-		plt.savefig('result.png')
+		plt.savefig('Result.png')
 	print("The result has been saved in the folder. ")
 

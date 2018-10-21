@@ -26,8 +26,8 @@ def modeling_plotting(tr_img,tr_lbl,testing_data):
 	model.add(Dense(2,activation='softmax'))			
 
 
-	model.compile(optimizer= Adam(lr=2e-8), loss='categorical_crossentropy',metrics=['accuracy'])
-	model.fit(x=tr_img,y=tr_lbl,epochs=80,batch_size=100, validation_split=0.1)	 
+	model.compile(optimizer= Adam(lr=1e-3), loss='categorical_crossentropy',metrics=['accuracy'])
+	model.fit(x=tr_img,y=tr_lbl,epochs=80,batch_size=100)	 
 	model.summary()
 
 	fig=plt.figure(figsize=(14,14))

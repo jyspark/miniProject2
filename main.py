@@ -8,9 +8,6 @@ import numpy as np
 def main(user_data):
 	if user_data == '1':
 
-
-
-
 		path = '.'
 		path_Data = path + '/User_Data'
 

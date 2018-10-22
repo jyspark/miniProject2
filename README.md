@@ -14,3 +14,5 @@ For this project some packages are necessary before running:
 	numpy, matplotlib, keras, tqdm,tensorflow, and cv2
   
  The program can be run with your own data set. Separate your data set in User_train and User_Data folders.
+ 
+ The program can be also run with the data I've prepared. It classifies Froot Loops cereal and Cocoa Krispies cereal.

@@ -29,6 +29,8 @@ def modeling_plotting(tr_img,tr_lbl,testing_data):
 	model.fit(x=tr_img,y=tr_lbl,epochs=80,batch_size=100)	 
 	model.summary()
 
+
+
 	fig=plt.figure(figsize=(14,14))
 
 	#Display the result

@@ -23,8 +23,7 @@ def modeling_plotting(tr_img,tr_lbl,testing_data):
 	model.add(Flatten())
 	model.add(Dense(500,activation='relu'))				
 	model.add(Dropout(rate=0.5))
-	model.add(Dense(2,activation='softmax'))			
-
+	model.add(Dense(2,activation='softmax'))	
 
 	model.compile(optimizer= Adam(lr=1e-3), loss='categorical_crossentropy',metrics=['accuracy'])
 	model.fit(x=tr_img,y=tr_lbl,epochs=80,batch_size=100)	 

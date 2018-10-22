@@ -89,4 +89,3 @@ def main(user_data):
 if __name__ == '__main__':
 	user_data = str(input("Do you want to run with your own data set? (1 for Yes, 0 for No). "))
 	main(user_data)
-

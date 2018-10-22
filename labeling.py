@@ -39,7 +39,3 @@ def label_and_test(test_dir):
 	shuffle(test_set)
 	#print("test images:" ,test_images)
 	return test_set
-
-
-
-	

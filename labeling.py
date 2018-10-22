@@ -27,6 +27,9 @@ def label_and_train(train_dir):
 	shuffle(train_set)
 	return train_set
 
+
+
+
 #read the images in grayscale & label and test the data set
 def label_and_test(test_dir):
 	
